@@ -5,13 +5,13 @@ const SignedInLinks = () => {
   return (
     <ul className='right'>
       <li>
-        <NavLink to='/'>New Project</NavLink>
+        <NavLink to='/new'>New Project</NavLink>
       </li>
       <li>
-        <NavLink to='/'>Log Out</NavLink>
+        <NavLink to='/logout'>Log Out</NavLink>
       </li>
       <li>
-        <NavLink to='/' className='btn btn-floating pink lighten-1'>
+        <NavLink to='/profile' className='btn btn-floating pink lighten-1'>
           AJ
         </NavLink>
       </li>
