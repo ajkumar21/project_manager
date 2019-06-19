@@ -1,5 +1,6 @@
 import React from 'react';
 import ProjectSummary from './ProjectSummary';
+import { Link } from 'react-router-dom';
 
 const ProjectList = ({ projects }) => {
   return (
@@ -8,12 +9,14 @@ const ProjectList = ({ projects }) => {
       {projects &&
         projects.map(project => {
           return (
-            <ProjectSummary
-              project={project}
-              key={project.id}
-              owner={project.authorFirstName + ' ' + project.authorLastName}
-              date={'3rd September, 2am'}
-            />
+            <Link key={project.id} to={'/project/' + project.id}>
+              <ProjectSummary
+                project={project}
+                key={project.id}
+                owner={project.authorFirstName + ' ' + project.authorLastName}
+                date={'3rd September, 2am'}
+              />
+            </Link>
           );
         })}
     </div>
