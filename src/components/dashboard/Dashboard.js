@@ -26,7 +26,6 @@ class Dashboard extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     // state is the redux state, this is mapping to "projects" held within the props - as displayed by the log on this page
     projects: state.firestore.ordered.projects

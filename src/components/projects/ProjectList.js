@@ -12,7 +12,6 @@ const ProjectList = ({ projects }) => {
             <Link key={project.id} to={'/project/' + project.id}>
               <ProjectSummary
                 project={project}
-                key={project.id}
                 owner={project.authorFirstName + ' ' + project.authorLastName}
                 date={'3rd September, 2am'}
               />
