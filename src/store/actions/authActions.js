@@ -13,3 +13,15 @@ export const signIn = creds => {
       });
   };
 };
+
+export const signOut = () => {
+  return (dispatch, getState, { getFirebase }) => {
+    const firebase = getFirebase();
+    firebase
+      .auth()
+      .signOut()
+      .then(res => {
+        dispatch({ type: 'SIGNOUT_SUCCESS' });
+      });
+  };
+};

@@ -4,7 +4,7 @@ import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 import { connect } from 'react-redux';
 
-const NavBar = () => {
+const NavBar = props => {
   return (
     <nav className='nav-wrapper grey darken-3'>
       <div className='container'>
@@ -12,8 +12,7 @@ const NavBar = () => {
           {' '}
           Project Manager
         </Link>
-        <SignedInLinks />
-        <SignedOutLinks />
+        {props.loggedIn ? <SignedInLinks /> : <SignedOutLinks />}
       </div>
     </nav>
   );
