@@ -3,12 +3,23 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import { Provider } from 'react-redux';
 import rootReducer from './store/reducers/rootReducer';
 import thunk from 'redux-thunk';
+import { reduxFirestore, getFirestore } from 'redux-firestore';
+import { reactReduxFirebase, getFirebase } from 'react-redux-firebase';
+import fbConfig from './config/fbConfig';
 
-const middleware = applyMiddleware(thunk);
+// compose used to connect Firebase and Firestore to project.
+// import redux-firestore and react-redux-firestore to do this
+// then pass config file into these functions using compose
+
+const middleware = compose(
+  applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
+  reduxFirestore(fbConfig),
+  reactReduxFirebase(fbConfig)
+);
 
 const store = createStore(rootReducer, middleware);
 
