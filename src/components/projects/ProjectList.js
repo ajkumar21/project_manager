@@ -10,11 +10,7 @@ const ProjectList = ({ projects }) => {
         projects.map(project => {
           return (
             <Link key={project.id} to={'/project/' + project.id}>
-              <ProjectSummary
-                project={project}
-                owner={project.authorFirstName + ' ' + project.authorLastName}
-                date={'3rd September, 2am'}
-              />
+              <ProjectSummary project={project} />
             </Link>
           );
         })}

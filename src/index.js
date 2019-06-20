@@ -18,7 +18,13 @@ import fbConfig from './config/fbConfig';
 const middleware = compose(
   applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
   reduxFirestore(fbConfig),
-  reactReduxFirebase(fbConfig, { attachAuthIsReady: true })
+  reactReduxFirebase(fbConfig, {
+    attachAuthIsReady: true,
+
+    // add profile to firebase for each user, details found in firestore with collection called 'users'
+    useFirestoreForProfile: true,
+    userProfile: 'users'
+  })
 );
 
 const store = createStore(rootReducer, middleware);

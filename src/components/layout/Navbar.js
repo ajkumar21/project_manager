@@ -12,7 +12,11 @@ const NavBar = props => {
           {' '}
           Project Manager
         </Link>
-        {props.loggedIn ? <SignedInLinks /> : <SignedOutLinks />}
+        {props.loggedIn ? (
+          <SignedInLinks profile={props.profile} />
+        ) : (
+          <SignedOutLinks />
+        )}
       </div>
     </nav>
   );
@@ -20,7 +24,8 @@ const NavBar = props => {
 
 const mapStateToProps = state => {
   return {
-    loggedIn: !state.firebase.auth.isEmpty
+    loggedIn: !state.firebase.auth.isEmpty,
+    profile: state.firebase.profile
   };
 };
 export default connect(mapStateToProps)(NavBar);

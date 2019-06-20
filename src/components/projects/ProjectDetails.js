@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
 import { Redirect } from 'react-router-dom';
+import moment from 'moment';
 
 function ProjectDetails(props) {
   const id = props.match.params.id;
@@ -12,7 +13,13 @@ function ProjectDetails(props) {
   if (!auth.uid) return <Redirect to='/signin' />;
   //Use if statement for db read write as it takes time, so if project is not undefined then return react code else return loading screen
   if (props.project) {
-    const { title, content, authorFirstName, authorLastName } = props.project;
+    const {
+      title,
+      content,
+      authorFirstName,
+      authorLastName,
+      createdAt
+    } = props.project;
 
     return (
       <div className='container section project-details'>
@@ -23,7 +30,7 @@ function ProjectDetails(props) {
           </div>
           <div className='card-action grey lighten-4 grey-text'>
             <div>{'By: ' + authorFirstName + ' ' + authorLastName}</div>
-            <div>2nd September, 2am</div>
+            <div>{moment(createdAt.toDate()).calendar()}</div>
           </div>
         </div>
       </div>
