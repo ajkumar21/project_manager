@@ -7,7 +7,6 @@ import moment from 'moment';
 
 function ProjectDetails(props) {
   const id = props.match.params.id;
-  console.log(props);
   // checks if logged in, if not then redirect to login page
   const { auth } = props;
   if (!auth.uid) return <Redirect to='/signin' />;
