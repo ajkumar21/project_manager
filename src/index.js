@@ -18,17 +18,23 @@ import fbConfig from './config/fbConfig';
 const middleware = compose(
   applyMiddleware(thunk.withExtraArgument({ getFirebase, getFirestore })),
   reduxFirestore(fbConfig),
-  reactReduxFirebase(fbConfig)
+  reactReduxFirebase(fbConfig, { attachAuthIsReady: true })
 );
 
 const store = createStore(rootReducer, middleware);
 
-ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
-  document.getElementById('root')
-);
+// within reactReduxFirebase have a config object with attachAuthIsReady
+// and then use store.firebaseAuthIsReady, which waits for auth to be initialised
+// before rendering the page. Thus prevents the login/logout flicker when refreshing page
+// Only renders page once it knows auth status. not before, which causes the flicker
+store.firebaseAuthIsReady.then(() => {
+  ReactDOM.render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+    document.getElementById('root')
+  );
+});
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.

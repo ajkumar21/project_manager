@@ -2,10 +2,14 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 function ProjectDetails(props) {
   const id = props.match.params.id;
   console.log(props);
+  // checks if logged in, if not then redirect to login page
+  const { auth } = props;
+  if (!auth.uid) return <Redirect to='/signin' />;
   //Use if statement for db read write as it takes time, so if project is not undefined then return react code else return loading screen
   if (props.project) {
     const { title, content, authorFirstName, authorLastName } = props.project;
@@ -40,7 +44,8 @@ const mapStateToProps = (state, props) => {
   const project = projects ? projects[id] : null;
 
   return {
-    project: project
+    project: project,
+    auth: state.firebase.auth
   };
 };
 

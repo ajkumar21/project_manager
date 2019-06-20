@@ -4,10 +4,13 @@ import ProjectList from '../projects/ProjectList';
 import { connect } from 'react-redux';
 import { firestoreConnect } from 'react-redux-firebase';
 import { compose } from 'redux';
+import { Redirect } from 'react-router-dom';
 
 class Dashboard extends Component {
   render() {
-    const { projects } = this.props;
+    const { projects, auth } = this.props;
+    // checks if logged in, if not then redirect to login page
+    if (!auth.uid) return <Redirect to='/signin' />;
     return (
       <div className='dashboard container'>
         <div className='row'>
@@ -28,7 +31,8 @@ class Dashboard extends Component {
 const mapStateToProps = state => {
   return {
     // state is the redux state, this is mapping to "projects" held within the props - as displayed by the log on this page
-    projects: state.firestore.ordered.projects
+    projects: state.firestore.ordered.projects,
+    auth: state.firebase.auth
   };
 };
 
