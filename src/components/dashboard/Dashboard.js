@@ -8,7 +8,7 @@ import { Redirect } from 'react-router-dom';
 
 class Dashboard extends Component {
   render() {
-    const { projects, auth } = this.props;
+    const { projects, auth, notifications } = this.props;
     // checks if logged in, if not then redirect to login page
     if (!auth.uid) return <Redirect to='/signin' />;
     return (
@@ -20,7 +20,7 @@ class Dashboard extends Component {
           </div>
           <div className='col s12 m5 offset-m1'>
             {/* offset m-1 means start next column after one space i.e. offset by 1 */}
-            <Notifications />
+            <Notifications notifications={notifications} />
           </div>
         </div>
       </div>
@@ -32,11 +32,15 @@ const mapStateToProps = state => {
   return {
     // state is the redux state, this is mapping to "projects" held within the props - as displayed by the log on this page
     projects: state.firestore.ordered.projects,
-    auth: state.firebase.auth
+    auth: state.firebase.auth,
+    notifications: state.firestore.ordered.notifications
   };
 };
 
 export default compose(
   connect(mapStateToProps),
-  firestoreConnect([{ collection: 'projects' }])
+  firestoreConnect([
+    { collection: 'projects', orderBy: ['createdAt', 'desc'] },
+    { collection: 'notifications', limit: 10, orderBy: ['time', 'desc'] }
+  ])
 )(Dashboard);
