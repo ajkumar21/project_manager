@@ -1,26 +1,45 @@
 import React from 'react';
+import { makeStyles } from '@material-ui/core/styles';
 import { Link } from 'react-router-dom';
 import SignedInLinks from './SignedInLinks';
 import SignedOutLinks from './SignedOutLinks';
 import { connect } from 'react-redux';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import Typography from '@material-ui/core/Typography';
 
-const NavBar = props => {
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1
+  },
+
+  title: {
+    flexGrow: 1
+  }
+}));
+
+function ButtonAppBar(props) {
+  const classes = useStyles();
+
   return (
-    <nav className='nav-wrapper grey darken-3'>
-      <div className='container'>
-        <Link to='/' className='brand-logo left'>
-          {' '}
-          Project Manager
-        </Link>
-        {props.loggedIn ? (
-          <SignedInLinks profile={props.profile} />
-        ) : (
-          <SignedOutLinks />
-        )}
-      </div>
-    </nav>
+    <div className={classes.root}>
+      <AppBar position='static'>
+        <Toolbar>
+          <Typography variant='h6' className={classes.title}>
+            <Link style={{ color: 'white' }} to='/'>
+              AJ's Blog
+            </Link>
+          </Typography>
+          {props.loggedIn ? (
+            <SignedInLinks profile={props.profile} />
+          ) : (
+            <SignedOutLinks />
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
   );
-};
+}
 
 const mapStateToProps = state => {
   return {
@@ -28,4 +47,5 @@ const mapStateToProps = state => {
     profile: state.firebase.profile
   };
 };
-export default connect(mapStateToProps)(NavBar);
+
+export default connect(mapStateToProps)(ButtonAppBar);

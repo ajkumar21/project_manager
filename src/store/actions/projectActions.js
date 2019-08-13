@@ -2,10 +2,12 @@ export const createProject = project => {
   return (dispatch, getState, { getFirebase, getFirestore }) => {
     //async call to db
     const firestore = getFirestore();
+    console.log('here');
 
     //get user details from state
     const profile = getState().firebase.profile;
     const authorID = getState().firebase.auth.uid;
+    console.log(project);
 
     firestore
       .collection('projects')
