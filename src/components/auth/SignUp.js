@@ -1,64 +1,107 @@
-import React, { Component } from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect } from 'react-router-dom';
 import { signUp } from '../../store/actions/authActions';
 
-class SignUp extends Component {
-  state = {
-    email: '',
-    password: '',
-    firstName: '',
-    lastName: ''
-  };
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
 
-  handleChange = e => {
-    // e.target.id uses the id field of the html code to get text. id matched state field names so this can be used
-    this.setState({ [e.target.id]: e.target.value });
-  };
+const useStyles = makeStyles({
+  card: {
+    minWidth: 275,
+    maxWidth: 400,
 
-  handleSubmit = e => {
-    e.preventDefault();
-    this.props.signUp(this.state);
-  };
-
-  render() {
-    // checks if logged in, if so then redirect to dashboard page
-    if (this.props.auth.uid) return <Redirect to='/' />;
-    return (
-      <div className='container'>
-        <form onSubmit={this.handleSubmit} className='white'>
-          <h5 className='grey-text text-darken-3'>Sign Up</h5>
-          <div className='input-field'>
-            <label htmlFor='email'>Email</label>
-            <input type='email' id='email' onChange={this.handleChange} />
-          </div>
-
-          <div className='input-field'>
-            <label htmlFor='password'>Password</label>
-            <input type='password' id='password' onChange={this.handleChange} />
-          </div>
-
-          <div className='input-field'>
-            <label htmlFor='firstName'>First Name</label>
-            <input type='text' id='firstName' onChange={this.handleChange} />
-          </div>
-
-          <div className='input-field'>
-            <label htmlFor='lastName'>Last Name</label>
-            <input type='text' id='lastName' onChange={this.handleChange} />
-          </div>
-
-          <div className='input-field'>
-            <button className='btn pink lighten-1 z-depth-0'>Sign Up</button>
-            <div className='red-text center'>
-              {this.props.authError ? this.props.authError : ''}
-            </div>
-          </div>
-        </form>
-      </div>
-    );
+    margin: 'auto',
+    marginTop: '50px'
+  },
+  button: {
+    margin: 'auto',
+    background: 'linear-gradient(45deg, #FE6B8B 30%, #FF8E53 90%)',
+    border: 0,
+    borderRadius: 3,
+    boxShadow: '0 3px 5px 2px rgba(255, 105, 135, .3)',
+    color: 'white',
+    height: 48,
+    padding: '0 30px'
+  },
+  title: {
+    fontSize: 14
+  },
+  pos: {
+    marginBottom: 12
   }
-}
+});
+
+const SignUp = ({ auth, authError, signUp }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
+
+  const classes = useStyles();
+  if (auth.uid) return <Redirect to='/' />;
+  return (
+    // checks if logged in, if so then redirect to dashboard page
+    <Card className={classes.card}>
+      <CardContent>
+        <h5 className='grey-text text-darken-3'>Sign Up</h5>
+        <div className='input-field'>
+          <label htmlFor='email'>Email</label>
+          <input
+            type='email'
+            id='email'
+            value={email}
+            onChange={e => setEmail(e.target.value)}
+          />
+        </div>
+
+        <div className='input-field'>
+          <label htmlFor='password'>Password</label>
+          <input
+            type='password'
+            id='password'
+            value={password}
+            onChange={e => setPassword(e.target.value)}
+          />
+        </div>
+
+        <div className='input-field'>
+          <label htmlFor='firstName'>First Name</label>
+          <input
+            type='text'
+            id='firstName'
+            value={firstName}
+            onChange={e => setFirstName(e.target.value)}
+          />
+        </div>
+
+        <div className='input-field'>
+          <label htmlFor='lastName'>Last Name</label>
+          <input
+            type='text'
+            id='lastName'
+            value={lastName}
+            onChange={e => setLastName(e.target.value)}
+          />
+        </div>
+      </CardContent>
+
+      <CardActions>
+        <Button
+          onClick={() => signUp({ email, password, firstName, lastName })}
+          className='btn pink lighten-1 z-depth-0'
+          className={classes.button}
+        >
+          Sign Up
+        </Button>
+        <div className='red-text center'>{authError ? authError : ''}</div>
+      </CardActions>
+    </Card>
+  );
+};
 
 const mapStateToProps = state => {
   return {
