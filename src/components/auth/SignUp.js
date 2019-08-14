@@ -92,7 +92,6 @@ const SignUp = ({ auth, authError, signUp }) => {
       <CardActions>
         <Button
           onClick={() => signUp({ email, password, firstName, lastName })}
-          className='btn pink lighten-1 z-depth-0'
           className={classes.button}
         >
           Sign Up

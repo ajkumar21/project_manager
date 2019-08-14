@@ -33,7 +33,11 @@ const SignedInLinks = props => {
 
   return (
     <React.Fragment>
-      <Button style={{ color: 'white' }} onClick={handleClickOpen}>
+      <Button
+        style={{ color: 'white' }}
+        component='a'
+        onClick={handleClickOpen}
+      >
         New
       </Button>
 
@@ -81,7 +85,7 @@ const SignedInLinks = props => {
         </DialogActions>
       </Dialog>
 
-      <Button style={{ color: 'white' }} onClick={props.signOut}>
+      <Button style={{ color: 'white' }} component='a' onClick={props.signOut}>
         Log Out
       </Button>
 

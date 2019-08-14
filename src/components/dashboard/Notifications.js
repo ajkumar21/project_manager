@@ -1,9 +1,22 @@
 import React from 'react';
 import moment from 'moment';
+import Card from '@material-ui/core/Card';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles({
+  card: {
+    minWidth: 275,
+    maxWidth: 400,
+    margin: 'auto',
+    marginTop: '50px'
+  }
+});
 
 const Notifications = ({ notifications }) => {
+  const classes = useStyles();
+
   return (
-    <div className='section'>
+    <Card className={classes.card}>
       <div className='card z-depth-0'>
         <div className='card-content'>
           <span className='card-title'>Notifications</span>
@@ -24,7 +37,7 @@ const Notifications = ({ notifications }) => {
           </ul>
         </div>
       </div>
-    </div>
+    </Card>
   );
 };
 

@@ -13,7 +13,6 @@ const useStyles = makeStyles({
   card: {
     minWidth: 275,
     maxWidth: 400,
-
     margin: 'auto',
     marginTop: '50px'
   },
