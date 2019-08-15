@@ -7,10 +7,8 @@ import moment from 'moment'; //date display manipulation - check docs for functi
 
 const useStyles = makeStyles({
   card: {
-    minWidth: 275,
-    maxWidth: 400,
-    margin: 'auto',
-    marginTop: '40px'
+    width: 300,
+    margin: '20px'
   },
 
   title: {

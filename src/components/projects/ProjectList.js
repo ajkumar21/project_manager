@@ -1,4 +1,6 @@
 import React from 'react';
+import Grow from '@material-ui/core/Grow';
+
 import ProjectSummary from './ProjectSummary';
 import { Link } from 'react-router-dom';
 
@@ -12,7 +14,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />;
 });
 
-const ProjectList = ({ projects }) => {
+export default function SimpleGrow({ projects }) {
   const [open, setOpen] = React.useState('');
 
   function handleClickOpen(id) {
@@ -31,15 +33,25 @@ const ProjectList = ({ projects }) => {
   // } = props.project;
 
   return (
-    <div className='project-list section'>
-      {/* add the project && in order to prevent front end rending before firestore returns data. otherwise errors occurs */}
+    <div
+      style={{
+        maxWidth: 'auto',
+        display: 'flex',
+        flexWrap: 'wrap',
+        margin: 'auto',
+        alignItems: 'center'
+      }}
+    >
+      {' '}
       {projects &&
-        projects.map(project => {
+        projects.map((project, index) => {
           return (
             <React.Fragment key={project.id}>
-              <Link onClick={() => handleClickOpen(project.id)}>
-                <ProjectSummary project={project} />
-              </Link>
+              <Grow in {...{ timeout: 1000 * index }}>
+                <Link onClick={() => handleClickOpen(project.id)}>
+                  <ProjectSummary project={project} />
+                </Link>
+              </Grow>
 
               <Dialog
                 open={open === project.id}
@@ -68,6 +80,4 @@ const ProjectList = ({ projects }) => {
         })}
     </div>
   );
-};
-
-export default ProjectList;
+}
