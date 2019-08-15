@@ -45,6 +45,7 @@ const SignedInLinks = props => {
         open={open}
         onClose={handleClose}
         aria-labelledby='form-dialog-title'
+        maxWidth='xl'
       >
         <DialogTitle id='form-dialog-title'>New Blog Post</DialogTitle>
         <DialogContent>
@@ -55,6 +56,7 @@ const SignedInLinks = props => {
             label='Title'
             type='text'
             fullWidth
+            maxWidth='xl'
             multiline
             rows={1}
             onChange={event => {

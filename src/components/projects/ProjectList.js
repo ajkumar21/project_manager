@@ -37,7 +37,6 @@ const ProjectList = ({ projects }) => {
       {/* add the project && in order to prevent front end rending before firestore returns data. otherwise errors occurs */}
       {projects &&
         projects.map(project => {
-          console.log(project.content);
           return (
             <React.Fragment key={project.id}>
               <Link onClick={() => handleClickOpen(project.id)}>
@@ -50,6 +49,7 @@ const ProjectList = ({ projects }) => {
                 keepMounted
                 onClose={handleClose}
                 scroll='paper'
+                maxWidth='xl'
               >
                 <DialogTitle id='alert-dialog-slide-title'>
                   {project.title}
