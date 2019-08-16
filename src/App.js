@@ -8,7 +8,7 @@ import SignUp from './components/auth/SignUp';
 function App() {
   return (
     <BrowserRouter>
-      <div className='App'>
+      <div style={{ marginTop: '100px' }} className='App'>
         <NavBar />
         <Switch>
           <Route path='/' exact component={Dashboard} />
