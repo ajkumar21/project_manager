@@ -12,12 +12,12 @@ class Dashboard extends Component {
     // checks if logged in, if not then redirect to login page
     if (!auth.uid) return <Redirect to='/signin' />;
     return (
-      <div className='row'>
-        <div className='col s9'>
+      <div style={{ marginTop: '75px' }} className='row'>
+        <div style={{ alignItems: 'center' }} className='col s9'>
           {/* column s12 = 12 columns on small screens, 6 on medium screens */}
           <ProjectList projects={projects} />
         </div>
-        <div className='col s3'>
+        <div style={{ alignItems: 'center' }} className='col s3'>
           {/* offset m-1 means start next column after one space i.e. offset by 1 */}
           <Notifications notifications={notifications} />
         </div>

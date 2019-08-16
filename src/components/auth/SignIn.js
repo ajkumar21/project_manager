@@ -24,7 +24,7 @@ const useStyles = makeStyles({
     minWidth: 275,
     maxWidth: 400,
     margin: 'auto',
-    marginTop: '50px'
+    marginTop: '5%'
   },
   button: {
     margin: 'auto',

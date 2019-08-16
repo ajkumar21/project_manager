@@ -15,6 +15,10 @@ const useStyles = makeStyles(theme => ({
 
   title: {
     flexGrow: 1
+  },
+
+  appBar: {
+    backgroundColor: '#cb2d6f'
   }
 }));
 
@@ -23,10 +27,10 @@ function ButtonAppBar(props) {
 
   return (
     <div className={classes.root}>
-      <AppBar position='static'>
+      <AppBar className={classes.appBar}>
         <Toolbar>
-          <Typography variant='h6' className={classes.title}>
-            <Link style={{ color: 'white' }} to='/'>
+          <Typography variant='h5' className={classes.title}>
+            <Link style={{ color: '#cccccc' }} to='/'>
               AJ's Blog
             </Link>
           </Typography>
